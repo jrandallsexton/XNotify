@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify.Tests", "XNotify.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify", "XNotify\XNotify.csproj", "{E93500CE-84DB-4E66-B547-B6674FD94EA3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1AC07AAE-4C47-4BAF-AEC1-9FC12298CD61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6900452F-7258-4C55-9BD7-F4612ABF4944}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66FF7359-95C0-463B-BB2B-F56EFCE744B6} = {1AC07AAE-4C47-4BAF-AEC1-9FC12298CD61}
+		{E93500CE-84DB-4E66-B547-B6674FD94EA3} = {6900452F-7258-4C55-9BD7-F4612ABF4944}
 	EndGlobalSection
 EndGlobal
