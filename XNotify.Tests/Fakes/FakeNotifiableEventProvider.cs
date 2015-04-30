@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 
 using XNotify.Contracts;
 
 namespace XNotify.Tests.Fakes
 {
-    public class FakeNotifiableEventProvider : INotifiableEventProvider
+    public class FakeNotifiableEventProvider<T> : INotifiableEventProvider<T> where T : INotifiableEvent
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Source { get; set; }
+        public int? ExternalId { get; set; }
+        public Guid? ExternalGuid { get; set; }
     }
 }

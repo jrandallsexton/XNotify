@@ -1,12 +1,31 @@
-﻿using System;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using XNotify.Contracts;
 
 namespace XNotify.Services
 {
-    class NotificationService
+    public class NotificationService : INotificationService
     {
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public INotificationPersistence Persistence { get; set; }
+
+        public INotificationProcessor Processor { get; set; }
+
+        public INotificationQueue<INotifiableEvent> Queue { get; set; }
+
+        public IList<INotificationProvider> NotificationProviders { get; set; }
+
+        public INotificationMonitor Monitor { get; set; }
+
+        public INotificationLogger Logger { get; set; }
+
+        public IList NotificationSourceProviders { get; set; }
     }
 }
