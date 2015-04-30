@@ -39,7 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\INotifiableEvent.cs" />
+    <Compile Include="Contracts\INotifiableEventProvider.cs" />
+    <Compile Include="Contracts\INotificationLogger.cs" />
+    <Compile Include="Contracts\INotificationMonitor.cs" />
+    <Compile Include="Contracts\INotificationProcessor.cs" />
+    <Compile Include="Contracts\INotificationProvider.cs" />
+    <Compile Include="Contracts\INotificationQueue.cs" />
+    <Compile Include="Contracts\INotificationService.cs" />
+    <Compile Include="Monitors\NotificationMonitor.cs" />
+    <Compile Include="Processors\NotificationProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\EmailNotificationProvider.cs" />
+    <Compile Include="Providers\SmsNotificationProvider.cs" />
+    <Compile Include="Queues\NotificationQueue.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
