@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fakes\FakeNotifiableEventProvider.cs" />
+    <Compile Include="Fakes\FakeNotificationTarget.cs" />
+    <Compile Include="Fakes\FakeNotificationTargetFactory.cs" />
     <Compile Include="NotificationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
