@@ -1,12 +1,12 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using XNotify.Contracts;
+using XNotify.Providers;
+using XNotify.Services;
+using XNotify.Tests.Fakes;
 
 using NUnit.Framework;
-using XNotify.Contracts;
-using XNotify.Tests.Fakes;
 
 namespace XNotify.Tests
 {
@@ -15,18 +15,36 @@ namespace XNotify.Tests
     {
 
         private List<FakeNotificationTarget> _targets = null;
-        
-        [TestFixtureSetUp]
+        private List<FakeNotifiableEventProvider<INotifiableEvent>> _sources = null;
+        private INotificationService _service = null;
+        private INotificationProviderConfig _smsProviderConfig = null;
+        private INotificationProvider _notificationProvider = null;
+
+        [SetUp]
         public void SetUp()
         {
-            _targets = FakeNotificationTargetFactory.CreateFakeTargets();
+            _sources = FakesFactory.CreateFakeEventProviders();
+            _targets = FakesFactory.CreateFakeTargets();
+            _smsProviderConfig = new FakeSmsNotificationProviderConfig();
+            _notificationProvider = new SmsNotificationProvider(_smsProviderConfig);
+            _service = new NotificationService("XNotificationService", "Service Testing Service", new List<INotificationProvider>
+            {
+                _notificationProvider
+            });
         }
 
-        [TestFixtureTearDown]
+        [Test]
+        public void Notification_Config_Fails()
+        {
+            
+        }
+
+        [TearDown]
         public void TearDown()
         {
             
         }
+
     }
 
 }

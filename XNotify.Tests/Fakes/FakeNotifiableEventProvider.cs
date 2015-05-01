@@ -1,6 +1,6 @@
 ﻿
 using System;
-
+using System.Collections.Generic;
 using XNotify.Contracts;
 
 namespace XNotify.Tests.Fakes
@@ -12,5 +12,9 @@ namespace XNotify.Tests.Fakes
         public string Source { get; set; }
         public int? ExternalId { get; set; }
         public Guid? ExternalGuid { get; set; }
+        public IList<T> Get()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

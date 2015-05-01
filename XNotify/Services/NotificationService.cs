@@ -1,8 +1,9 @@
 ﻿
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Security.Cryptography;
 using XNotify.Contracts;
 
 namespace XNotify.Services
@@ -27,5 +28,13 @@ namespace XNotify.Services
         public INotificationLogger Logger { get; set; }
 
         public IList NotificationSourceProviders { get; set; }
+
+        public NotificationService(string name, string description, IList<INotificationProvider> notificationProviders)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.NotificationProviders = notificationProviders;
+        }
+
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace XNotify.Providers
 {
-    class EmailNotificationProvider
+    public class EmailNotificationProvider
     {
+
     }
 }

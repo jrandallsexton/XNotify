@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace XNotify.Contracts
 {
-    public interface INotificationProvider
+    public interface INotificationProviderConfig
     {
-        INotificationProviderConfig Config { get; set; }
+        string Username { get; set; }
+        string Password { get; set; }
     }
 }
