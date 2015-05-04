@@ -15,5 +15,7 @@ namespace XNotify.Contracts
         INotificationMonitor Monitor { get; set; }
         INotificationLogger Logger { get; set; }
         IList NotificationSourceProviders { get; set; }
+        void Start();
+        void Stop();
     }
 }

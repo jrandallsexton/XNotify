@@ -7,7 +7,43 @@ using System.Threading.Tasks;
 
 namespace XNotify.Config
 {
-    public class NotificationProviderElement : ConfigurationElement
+    public interface INotificationProviderElement
+    {
+        [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
+        string Name { get; }
+
+        [ConfigurationProperty("class", IsRequired = true)]
+        string Class { get; set; }
+
+        [ConfigurationProperty("type", IsRequired = true)]
+        string Type { get; set; }
+
+        [ConfigurationProperty("enabled", IsRequired = true)]
+        bool Enabled { get; set; }
+
+        [ConfigurationProperty("username", IsRequired = true)]
+        string Username { get; set; }
+
+        [ConfigurationProperty("password", IsRequired = true)]
+        string Password { get; set; }
+
+        [ConfigurationProperty("sid", IsRequired = false)]
+        string Sid { get; set; }
+
+        ConfigurationLockCollection LockAttributes { get; }
+        ConfigurationLockCollection LockAllAttributesExcept { get; }
+        ConfigurationLockCollection LockElements { get; }
+        ConfigurationLockCollection LockAllElementsExcept { get; }
+        bool LockItem { get; set; }
+        ElementInformation ElementInformation { get; }
+        Configuration CurrentConfiguration { get; }
+
+        bool IsReadOnly();
+        bool Equals(object compareTo);
+        int GetHashCode();
+    }
+
+    public class NotificationProviderElement : ConfigurationElement, INotificationProviderElement
     {
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true)]

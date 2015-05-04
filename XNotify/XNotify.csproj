@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XNotify</RootNamespace>
     <AssemblyName>XNotify</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <Compile Include="Contracts\INotificationQueue.cs" />
     <Compile Include="Contracts\INotificationService.cs" />
     <Compile Include="Contracts\INotificationTarget.cs" />
+    <Compile Include="Loggers\NotificationLogger.cs" />
     <Compile Include="Monitors\NotificationMonitor.cs" />
     <Compile Include="Common\NotifiableEvent.cs" />
     <Compile Include="Processors\NotificationProcessor.cs" />

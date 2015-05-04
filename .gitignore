@@ -14,6 +14,10 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+# Build Artifacts
+**/bin/*
+**/obj/*
+
 # Windows shortcuts
 *.lnk
 
@@ -33,6 +37,9 @@ $RECYCLE.BIN/
 
 **/packages/*
 !**/packages/repositories.config
+
+**/TemporaryGeneratedFile/*
+*TemporaryGeneratedFile_*
 
 # Files that might appear on external disk
 .Spotlight-V100

@@ -7,7 +7,38 @@ using System.Threading.Tasks;
 
 namespace XNotify.Config
 {
-    public class EventProviderElement : ConfigurationElement
+    public interface IEventProviderElement
+    {
+
+        [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
+        string Name { get; set; }
+
+        [ConfigurationProperty("assemblyName", IsRequired = true)]
+        string AssemblyName { get; set; }
+
+        [ConfigurationProperty("class", IsRequired = true)]
+        string Class { get; set; }
+
+        [ConfigurationProperty("monitorInterval", IsRequired = true)]
+        int MonitorInterval { get; set; }
+
+        [ConfigurationProperty("enabled", IsRequired = true)]
+        bool Enabled { get; set; }
+
+        ConfigurationLockCollection LockAttributes { get; }
+        ConfigurationLockCollection LockAllAttributesExcept { get; }
+        ConfigurationLockCollection LockElements { get; }
+        ConfigurationLockCollection LockAllElementsExcept { get; }
+        bool LockItem { get; set; }
+        ElementInformation ElementInformation { get; }
+        Configuration CurrentConfiguration { get; }
+
+        bool IsReadOnly();
+        bool Equals(object compareTo);
+        int GetHashCode();
+    }
+
+    public class EventProviderElement : ConfigurationElement, IEventProviderElement
     {
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
@@ -15,6 +46,13 @@ namespace XNotify.Config
         {
             get { return (string)this["name"]; }
             set { this["name"] = value; }
+        }
+
+        [ConfigurationProperty("assemblyName", IsRequired = true)]
+        public string AssemblyName
+        {
+            get { return (string)this["assemblyName"]; }
+            set { this["assemblyName"] = value; }
         }
 
         [ConfigurationProperty("class", IsRequired = true)]
