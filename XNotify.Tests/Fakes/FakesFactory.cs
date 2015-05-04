@@ -9,11 +9,11 @@ namespace XNotify.Tests.Fakes
     public static class FakesFactory
     {
 
-        public static List<FakeNotifiableEventProvider<INotifiableEvent>> CreateFakeEventProviders()
+        public static List<FakeNotifiableEventProvider> CreateFakeEventProviders()
         {
-            var sources = new List<FakeNotifiableEventProvider<INotifiableEvent>>
+            var sources = new List<FakeNotifiableEventProvider>
             {
-                new FakeNotifiableEventProvider<INotifiableEvent>
+                new FakeNotifiableEventProvider
                 {
                     Description = "Fake data source",
                     Name = "MonitoredExternalData",

@@ -11,6 +11,6 @@ namespace XNotify.Contracts
         string Source { get; set; }
         int? ExternalId { get; set; }
         Guid? ExternalGuid { get; set; }
-        IList<T> Get();
+        IEnumerable<T> GetAll();
     }
 }

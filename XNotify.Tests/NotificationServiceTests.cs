@@ -15,7 +15,7 @@ namespace XNotify.Tests
     {
 
         private List<FakeNotificationTarget> _targets = null;
-        private List<FakeNotifiableEventProvider<INotifiableEvent>> _sources = null;
+        private List<FakeNotifiableEventProvider> _sources = null;
         private INotificationService _service = null;
         private INotificationProviderConfig _smsProviderConfig = null;
         private INotificationProvider _notificationProvider = null;

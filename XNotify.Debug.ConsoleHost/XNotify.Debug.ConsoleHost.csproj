@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E93500CE-84DB-4E66-B547-B6674FD94EA3}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{6124E9E4-DD40-41A0-A1F0-16B4A5E3A31E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XNotify</RootNamespace>
-    <AssemblyName>XNotify</AssemblyName>
+    <RootNamespace>XNotify.Debug.ConsoleHost</RootNamespace>
+    <AssemblyName>XNotify.Debug.ConsoleHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,33 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\EventProviderElement.cs" />
-    <Compile Include="Config\EventProvidersCollection.cs" />
-    <Compile Include="Config\NotificationProviderElement.cs" />
-    <Compile Include="Config\NotificationProvidersCollection.cs" />
-    <Compile Include="Config\XNotifyConfigSection.cs" />
-    <Compile Include="Contracts\INotifiableEvent.cs" />
-    <Compile Include="Contracts\INotifiableEventProvider.cs" />
-    <Compile Include="Contracts\INotificationLogger.cs" />
-    <Compile Include="Contracts\INotificationMonitor.cs" />
-    <Compile Include="Contracts\INotificationPersistence.cs" />
-    <Compile Include="Contracts\INotificationProcessor.cs" />
-    <Compile Include="Contracts\INotificationProvider.cs" />
-    <Compile Include="Contracts\INotificationProviderConfig.cs" />
-    <Compile Include="Contracts\INotificationQueue.cs" />
-    <Compile Include="Contracts\INotificationService.cs" />
-    <Compile Include="Contracts\INotificationTarget.cs" />
-    <Compile Include="Monitors\NotificationMonitor.cs" />
-    <Compile Include="Common\NotifiableEvent.cs" />
-    <Compile Include="Processors\NotificationProcessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\EmailNotificationProvider.cs" />
-    <Compile Include="Providers\SmsNotificationProvider.cs" />
-    <Compile Include="Queues\NotificationQueue.cs" />
-    <Compile Include="Services\NotificationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Persistence\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XNotify\XNotify.csproj">
+      <Project>{e93500ce-84db-4e66-b547-b6674fd94ea3}</Project>
+      <Name>XNotify</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
