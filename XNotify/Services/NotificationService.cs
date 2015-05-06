@@ -5,15 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Reflection;
+using System.Timers;
 
 using XNotify.Config;
 using XNotify.Contracts;
 using XNotify.Loggers;
+using XNotify.Providers;
 
 namespace XNotify.Services
 {
     public class NotificationService : INotificationService
     {
+
+        private Timer _timer = null;
+        private bool _enabled = true;
 
         public string Name { get; set; }
 
@@ -39,6 +44,7 @@ namespace XNotify.Services
 
         public NotificationService(string name, string description)
         {
+            this._timer = new Timer();
             this.Logger= new NotificationLogger();
             this.Configuration = XNotifyConfigSection.GetSection();
             this.Name = name;
@@ -47,6 +53,7 @@ namespace XNotify.Services
 
         public NotificationService(string name, string description, IList<INotificationProvider> notificationProviders)
         {
+            this._timer = new Timer();
             this.Logger = new NotificationLogger();
             this.Configuration = XNotifyConfigSection.GetSection();
             this.Name = name;
@@ -57,15 +64,38 @@ namespace XNotify.Services
         public void Start()
         {
             this.Logger.Log(string.Format("XNotify started {0}", Configuration.Name));
+            this.NotificationProviders = LoadNotificationProviders(Configuration.NotificationProviders);
             this.EventProviders = LoadEventProviders(Configuration.EventProvidersPath, Configuration.EventProviders);
-            MonitorEventProviders(EventProviders);
+
+            this._timer.Interval = 5000;
+            this._timer.Elapsed += _timer_Elapsed;
+            this._timer.Start();
+
+            while (_enabled) { }
+            
         }
 
-        private static void MonitorEventProviders(IEnumerable<INotifiableEventProvider<INotifiableEvent>> providers)
+        void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            MonitorEventProviders(this.EventProviders);
+        }
+
+        private void MonitorEventProviders(IEnumerable<INotifiableEventProvider<INotifiableEvent>> providers)
         {
             providers.ToList().ForEach(p =>
             {
-                p.GetAll().ToList().ForEach(x => Console.WriteLine("{0}: {1}.{2}", p.Name, x.Name, x.Description));
+                //p.GetAll().ToList().ForEach(x => Console.WriteLine("{0}: {1}\t{2}\t{3}", p.Name, x.UtcDue, x.Name, x.Description));
+                // Find all events that are due within the next 60 seconds
+                var cutOffTime = DateTime.UtcNow.AddMinutes(-1);
+                var items = p.GetAll().ToList().FindAll(notifiableEvent => notifiableEvent.UtcDue >= cutOffTime);
+                items.ForEach(x => NotificationProviders.ToList().ForEach(z =>
+                {
+                    Console.WriteLine("Item due: {0}", x.Name);
+                    var tos = new List<string>();
+                    var ccs = new List<string>();
+                    var bccs = new List<string>();
+                    z.Send(tos, ccs, bccs, "Test Subject", "Test Message");
+                }));
             });
         }
 
@@ -98,6 +128,17 @@ namespace XNotify.Services
 
                 providers.Add(eventProviderInstance);
             }
+
+            return providers;
+        }
+
+        private List<INotificationProvider> LoadNotificationProviders(INotificationProvidersCollection notificationProviders)
+        {
+            var providers = new List<INotificationProvider>
+            {
+                new SmtpNotificationProvider(),
+                new SmsNotificationProvider()
+            };
 
             return providers;
         }

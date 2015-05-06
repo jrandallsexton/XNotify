@@ -30,6 +30,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify.Tests.EventProvider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify.Tests.EventProviders.FakeEventProvider01", "XNotify.Tests.EventProviders.FakeEventProvider01\XNotify.Tests.EventProviders.FakeEventProvider01.csproj", "{3491EC69-9F0C-4474-97E3-930E93393771}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationProviders", "NotificationProviders", "{916CC82A-88E3-41C2-81F3-A56420E4E126}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify.Tests.NotificationProviders.MailTrap", "XNotify.Tests.NotificationProviders.MailTrap\XNotify.Tests.NotificationProviders.MailTrap.csproj", "{073314DC-46A7-49DB-A9A6-C5E4737F303F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNotify.Tests.NotificationProviders.Twilio", "XNotify.Tests.NotificationProviders.Twilio\XNotify.Tests.NotificationProviders.Twilio.csproj", "{3DEFA323-1DB6-489D-AF00-8C8155A4870D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +66,14 @@ Global
 		{3491EC69-9F0C-4474-97E3-930E93393771}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3491EC69-9F0C-4474-97E3-930E93393771}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3491EC69-9F0C-4474-97E3-930E93393771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{073314DC-46A7-49DB-A9A6-C5E4737F303F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{073314DC-46A7-49DB-A9A6-C5E4737F303F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{073314DC-46A7-49DB-A9A6-C5E4737F303F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{073314DC-46A7-49DB-A9A6-C5E4737F303F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEFA323-1DB6-489D-AF00-8C8155A4870D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEFA323-1DB6-489D-AF00-8C8155A4870D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEFA323-1DB6-489D-AF00-8C8155A4870D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEFA323-1DB6-489D-AF00-8C8155A4870D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +86,8 @@ Global
 		{2B0113C6-4A62-41EC-8FB9-C026241357C5} = {202608AE-B40A-4C78-8F34-514D34FE093A}
 		{51B5F8BE-1E5C-439E-BC7A-195956CC6015} = {2B0113C6-4A62-41EC-8FB9-C026241357C5}
 		{3491EC69-9F0C-4474-97E3-930E93393771} = {2B0113C6-4A62-41EC-8FB9-C026241357C5}
+		{916CC82A-88E3-41C2-81F3-A56420E4E126} = {202608AE-B40A-4C78-8F34-514D34FE093A}
+		{073314DC-46A7-49DB-A9A6-C5E4737F303F} = {916CC82A-88E3-41C2-81F3-A56420E4E126}
+		{3DEFA323-1DB6-489D-AF00-8C8155A4870D} = {916CC82A-88E3-41C2-81F3-A56420E4E126}
 	EndGlobalSection
 EndGlobal

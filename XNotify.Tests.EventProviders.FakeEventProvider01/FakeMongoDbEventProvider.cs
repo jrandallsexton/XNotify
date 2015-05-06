@@ -20,8 +20,8 @@ namespace XNotify.Tests.EventProviders.FakeEventProvider01
             var evnt = new NotifiableEvent
             {
                 Created = DateTime.UtcNow,
-                Description = "just a fake MongoDB event provider",
-                Name = "Fake event",
+                Description = "just a fake event coming from AppointmentNotifiableEventProvider",
+                Name = "Fake Appointment event",
                 Id = 1,
                 Message = "This is a fake event representing some event that XNotify will pull from an external data source",
                 Source = "XNotify.Tests.EventProviders.FakeEventProvider00.FakeMongoDbEventProvider",
@@ -32,6 +32,26 @@ namespace XNotify.Tests.EventProviders.FakeEventProvider01
             events.Add(evnt);
 
             return events.AsEnumerable();
+        }
+
+        public INotifiableEvent Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMessage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unsubscribe(int recipientId, int notificationProviderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MarkProcessed(int eventId, IEnumerable<int> recipientIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -34,5 +34,25 @@ namespace XNotify.Tests.Fakes
 
             return events.AsEnumerable();
         }
+
+        public INotifiableEvent Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMessage(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Unsubscribe(int recipientId, int notificationProviderId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MarkProcessed(int eventId, IEnumerable<int> recipientIds)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
