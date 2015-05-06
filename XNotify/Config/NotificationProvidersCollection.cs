@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace XNotify.Config
 {
-    public interface INotificationProvidersCollection
+    public interface INotificationProvidersConfigurationCollection
     {
         bool IsReadOnly();
         bool Equals(object compareTo);
@@ -30,7 +30,7 @@ namespace XNotify.Config
     }
 
     [ConfigurationCollection(typeof(NotificationProviderElement))]
-    public class NotificationProvidersCollection : ConfigurationElementCollection, INotificationProvidersCollection
+    public class NotificationProvidersCollection : ConfigurationElementCollection, INotificationProvidersConfigurationCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {

@@ -11,7 +11,7 @@ namespace XNotify.Loggers
     {
         public void Log(string message)
         {
-            return;
+            Console.WriteLine(message);
         }
     }
 }

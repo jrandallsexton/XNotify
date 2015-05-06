@@ -1,16 +1,28 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using XNotify.Common;
 using XNotify.Contracts;
 
-namespace XNotify.Providers
+namespace XNotify.NotificationProviders
 {
+
     public class SmsNotificationProvider : INotificationProvider
     {
+
+        public ENotificationProviderType ProviderType { get; set; }
         public INotificationProviderConfig Config { get; set; }
+
+        public void Send(string to, string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send(string to, string subject, string message)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Send(IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc, string subject, string message)
         {
@@ -31,5 +43,6 @@ namespace XNotify.Providers
         {
             this.Config = config;
         }
+
     }
 }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Config\EventProviderElement.cs" />
     <Compile Include="Config\EventProvidersCollection.cs" />
+    <Compile Include="Config\NotificationProviderConfig.cs" />
     <Compile Include="Config\NotificationProviderElement.cs" />
     <Compile Include="Config\NotificationProvidersCollection.cs" />
     <Compile Include="Config\XNotifyConfigSection.cs" />
@@ -62,11 +63,15 @@
     <Compile Include="Common\NotifiableEvent.cs" />
     <Compile Include="Processors\NotificationProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\EmailNotificationProvider.cs" />
-    <Compile Include="Providers\SmsNotificationProvider.cs" />
-    <Compile Include="Providers\SmtpNotificationProvider.cs" />
+    <Compile Include="NotificationProviders\EmailNotificationProvider.cs" />
+    <Compile Include="Common\ENotificationProviderType.cs" />
+    <Compile Include="NotificationProviders\SmsNotificationProvider.cs" />
+    <Compile Include="NotificationProviders\SmtpNotificationProvider.cs" />
     <Compile Include="Queues\NotificationQueue.cs" />
     <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Targets\EmailNotificationTarget.cs" />
+    <Compile Include="Targets\NotificationTarget.cs" />
+    <Compile Include="Targets\SmsNotificationTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\" />

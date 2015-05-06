@@ -7,10 +7,10 @@ using System.IO;
 using System.Reflection;
 using System.Timers;
 
+using XNotify.Common;
 using XNotify.Config;
 using XNotify.Contracts;
 using XNotify.Loggers;
-using XNotify.Providers;
 
 namespace XNotify.Services
 {
@@ -19,6 +19,7 @@ namespace XNotify.Services
 
         private Timer _timer = null;
         private bool _enabled = true;
+        private List<int> _processed = null; 
 
         public string Name { get; set; }
 
@@ -44,6 +45,7 @@ namespace XNotify.Services
 
         public NotificationService(string name, string description)
         {
+            this._processed = new List<int>();
             this._timer = new Timer();
             this.Logger= new NotificationLogger();
             this.Configuration = XNotifyConfigSection.GetSection();
@@ -64,7 +66,7 @@ namespace XNotify.Services
         public void Start()
         {
             this.Logger.Log(string.Format("XNotify started {0}", Configuration.Name));
-            this.NotificationProviders = LoadNotificationProviders(Configuration.NotificationProviders);
+            this.NotificationProviders = LoadNotificationProviders(Configuration.NotificationProvidersPath, Configuration.NotificationProviders);
             this.EventProviders = LoadEventProviders(Configuration.EventProvidersPath, Configuration.EventProviders);
 
             this._timer.Interval = 5000;
@@ -77,25 +79,49 @@ namespace XNotify.Services
 
         void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            MonitorEventProviders(this.EventProviders);
+            MonitorEventProviders(this.EventProviders, this.NotificationProviders);
         }
 
-        private void MonitorEventProviders(IEnumerable<INotifiableEventProvider<INotifiableEvent>> providers)
+        private void MonitorEventProviders(IEnumerable<INotifiableEventProvider<INotifiableEvent>> eventProviders,
+            IEnumerable<INotificationProvider> notificationProviders)
         {
-            providers.ToList().ForEach(p =>
+            eventProviders.ToList().ForEach(p =>
             {
-                //p.GetAll().ToList().ForEach(x => Console.WriteLine("{0}: {1}\t{2}\t{3}", p.Name, x.UtcDue, x.Name, x.Description));
                 // Find all events that are due within the next 60 seconds
                 var cutOffTime = DateTime.UtcNow.AddMinutes(-1);
-                var items = p.GetAll().ToList().FindAll(notifiableEvent => notifiableEvent.UtcDue >= cutOffTime);
-                items.ForEach(x => NotificationProviders.ToList().ForEach(z =>
+
+                var items = p.GetAll().ToList().FindAll(notEvnt => notEvnt.UtcDue >= cutOffTime && !_processed.Contains(notEvnt.Id));
+
+                items.ForEach(x =>
                 {
-                    Console.WriteLine("Item due: {0}", x.Name);
-                    var tos = new List<string>();
-                    var ccs = new List<string>();
-                    var bccs = new List<string>();
-                    z.Send(tos, ccs, bccs, "Test Subject", "Test Message");
-                }));
+
+                    Logger.Log(string.Format("Item due: {0}", x.Name));
+
+                    notificationProviders.ToList().ForEach(z =>
+                    {
+                        if (x.Targets == null) { return; }
+
+                        x.Targets.ToList().ForEach(t =>
+                        {
+                            switch (z.ProviderType)
+                            {
+                                case ENotificationProviderType.Email:
+                                    if (t.SendEmail)
+                                        z.Send(t.Email, x.Subject, x.Message);
+                                    break;
+                                case ENotificationProviderType.Sms:
+                                    if (t.SendSms)
+                                        z.Send(t.Sms, x.Message);
+                                    break;
+                            }
+                        });
+
+                    });
+
+                    _processed.Add(x.Id);
+
+                });
+
             });
         }
 
@@ -110,7 +136,8 @@ namespace XNotify.Services
         /// <param name="assemblyPath">root path of all dll locations</param>
         /// <param name="eventProviders">collection of configuration entries</param>
         /// <returns></returns>
-        private List<INotifiableEventProvider<INotifiableEvent>> LoadEventProviders(string assemblyPath, IEventProvidersCollection eventProviders)
+        private List<INotifiableEventProvider<INotifiableEvent>> LoadEventProviders(string assemblyPath,
+            IEventProvidersConfigurationCollection eventProviders)
         {
             var providers = new List<INotifiableEventProvider<INotifiableEvent>>();
 
@@ -123,7 +150,8 @@ namespace XNotify.Services
                     continue;
                 }
 
-                var eventProviderAssembly = Assembly.LoadFile(Path.Combine(assemblyPath, element.AssemblyName));
+                var assemblyLocation = Path.Combine(assemblyPath, element.AssemblyFolder);
+                var eventProviderAssembly = Assembly.LoadFile(Path.Combine(assemblyLocation, element.AssemblyName));
                 var eventProviderInstance = (INotifiableEventProvider<INotifiableEvent>)eventProviderAssembly.CreateInstance(element.Class);
 
                 providers.Add(eventProviderInstance);
@@ -132,13 +160,37 @@ namespace XNotify.Services
             return providers;
         }
 
-        private List<INotificationProvider> LoadNotificationProviders(INotificationProvidersCollection notificationProviders)
+        private List<INotificationProvider> LoadNotificationProviders(string assemblyPath,
+            INotificationProvidersConfigurationCollection notificationProviders)
         {
-            var providers = new List<INotificationProvider>
+            var providers = new List<INotificationProvider>();
+
+            foreach (INotificationProviderElement element in notificationProviders)
             {
-                new SmtpNotificationProvider(),
-                new SmsNotificationProvider()
-            };
+                if (!element.Enabled)
+                {
+                    Logger.Log(string.Format("Skipped loading for disabled Notification Provider: {0}", element.Class));
+                    continue; 
+                }
+
+                var assemblyLocation = Path.Combine(assemblyPath, element.AssemblyFolder);
+                var notificationProviderAssembly = Assembly.LoadFile(Path.Combine(assemblyLocation, element.AssemblyName));
+
+                //foreach (AssemblyName an in notificationProviderAssembly.GetReferencedAssemblies())
+                //{
+                //    var log = string.Format("Name={0}, Version={1}, Culture={2}, PublicKey token={3}", an.Name,
+                //        an.Version, an.CultureInfo.Name, (BitConverter.ToString(an.GetPublicKeyToken())));
+                //    Logger.Log(log);
+                //}
+
+                var notificationProviderInstance = (INotificationProvider)notificationProviderAssembly.CreateInstance(element.Class);
+
+                if (notificationProviderInstance == null) continue;
+
+                notificationProviderInstance.Config = new NotificationProviderConfig(element);
+
+                providers.Add(notificationProviderInstance);
+            }
 
             return providers;
         }

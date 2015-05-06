@@ -1,14 +1,17 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using XNotify.Common;
 
 namespace XNotify.Contracts
 {
     public interface INotificationProvider
     {
+        ENotificationProviderType ProviderType { get; set; }
         INotificationProviderConfig Config { get; set; }
+        void Send(string to, string message);
+        void Send(string to, string subject, string message);
         void Send(IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc, string subject, string message);
         void Send(IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc, string subject, string message, Action<string> callback);
     }

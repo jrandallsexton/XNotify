@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using XNotify.Contracts;
-using XNotify.Providers;
+using XNotify.NotificationProviders;
 using XNotify.Services;
 using XNotify.Tests.Fakes;
 

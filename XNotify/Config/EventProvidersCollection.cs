@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace XNotify.Config
 {
-    public interface IEventProvidersCollection
+    public interface IEventProvidersConfigurationCollection
     {
         EventProviderElement this[int index] { get; set; }
         int Count { get; }
@@ -31,7 +31,7 @@ namespace XNotify.Config
     }
 
     [ConfigurationCollection(typeof(EventProviderElement))]
-    public class EventProvidersCollection : ConfigurationElementCollection, IEventProvidersCollection
+    public class EventProvidersCollection : ConfigurationElementCollection, IEventProvidersConfigurationCollection
     {
 
         protected override ConfigurationElement CreateNewElement()

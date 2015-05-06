@@ -16,6 +16,9 @@ namespace XNotify.Config
         [ConfigurationProperty("assemblyName", IsRequired = true)]
         string AssemblyName { get; set; }
 
+        [ConfigurationProperty("assemblyFolder", IsRequired = true)]
+        string AssemblyFolder { get; set; }
+
         [ConfigurationProperty("class", IsRequired = true)]
         string Class { get; set; }
 
@@ -53,6 +56,13 @@ namespace XNotify.Config
         {
             get { return (string)this["assemblyName"]; }
             set { this["assemblyName"] = value; }
+        }
+
+        [ConfigurationProperty("assemblyFolder", IsRequired = true)]
+        public string AssemblyFolder
+        {
+            get { return (string)this["assemblyFolder"]; }
+            set { this["assemblyFolder"] = value; }
         }
 
         [ConfigurationProperty("class", IsRequired = true)]
