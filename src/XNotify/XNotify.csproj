@@ -76,6 +76,7 @@
     <Compile Include="Monitors\NotificationMonitor.cs" />
     <Compile Include="Common\NotifiableEvent.cs" />
     <Compile Include="NotificationProviders\NotificationProviderResponse.cs" />
+    <Compile Include="Persistence\MongoDbProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationProviders\EmailNotificationProvider.cs" />
     <Compile Include="Common\ENotificationProviderType.cs" />
@@ -87,9 +88,7 @@
     <Compile Include="Targets\NotificationTarget.cs" />
     <Compile Include="Targets\SmsNotificationTarget.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Persistence\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

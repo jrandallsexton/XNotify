@@ -1,13 +1,13 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XNotify.Contracts
 {
-    public interface INotificationPersistence
+    public interface INotificationPersistence<T> where T : INotifiableEvent
     {
-
+        void Add(T item);
+        void Remove(T item);
+        IList<T> GetList();
+        T Get(int id);
     }
 }
