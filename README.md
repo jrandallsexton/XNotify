@@ -1,0 +1,2 @@
+# XNotify
+Generic notification framework
