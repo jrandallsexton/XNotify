@@ -8,7 +8,7 @@ namespace XNotify.Contracts
 {
     public interface INotificationProvider
     {
-        ENotificationProviderType ProviderType { get; set; }
+        NotificationProviderType ProviderType { get; set; }
         INotificationProviderConfig Config { get; set; }
         void Send(string to, string message);
         void Send(string to, string subject, string message);

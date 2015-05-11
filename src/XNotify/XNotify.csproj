@@ -79,7 +79,7 @@
     <Compile Include="Persistence\MongoDbProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationProviders\EmailNotificationProvider.cs" />
-    <Compile Include="Common\ENotificationProviderType.cs" />
+    <Compile Include="Common\NotificationProviderType.cs" />
     <Compile Include="NotificationProviders\SmsNotificationProvider.cs" />
     <Compile Include="NotificationProviders\SmtpNotificationProvider.cs" />
     <Compile Include="Queues\NotificationQueue.cs" />

@@ -27,7 +27,7 @@ namespace XNotify.Services
 
         private IXNotifyConfigSection Configuration { get; set; }
 
-        public INotificationPersistence Persistence { get; set; }
+        public INotificationPersistence<INotifiableEvent> Persistence { get; set; }
 
         public INotificationQueue<INotifiableEvent> Queue { get; set; }
 
@@ -36,8 +36,6 @@ namespace XNotify.Services
         public IList<INotificationProvider> NotificationProviders { get; set; }
 
         public INotificationLogger Logger { get; set; }
-
-        public IList NotificationSourceProviders { get; set; }
 
         public NotificationService()
         {
@@ -111,11 +109,11 @@ namespace XNotify.Services
                         {
                             switch (z.ProviderType)
                             {
-                                case ENotificationProviderType.Email:
+                                case NotificationProviderType.Email:
                                     if (t.SendEmail)
                                         z.Send(t.Email, x.Subject, x.Message);
                                     break;
-                                case ENotificationProviderType.Sms:
+                                case NotificationProviderType.Sms:
                                     if (t.SendSms)
                                         z.Send(t.Sms, x.Message);
                                     break;
@@ -133,6 +131,7 @@ namespace XNotify.Services
 
         public void Stop()
         {
+            _enabled = false;
             Logger.Log(string.Format("XNotify stopped {0}", Configuration.Name));
         }
 

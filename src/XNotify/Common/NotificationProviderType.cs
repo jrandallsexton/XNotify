@@ -1,7 +1,7 @@
 ﻿
 namespace XNotify.Common
 {
-    public enum ENotificationProviderType
+    public enum NotificationProviderType
     {
         Email = 0,
         Sms = 1

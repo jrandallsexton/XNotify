@@ -13,12 +13,12 @@ namespace XNotify.Tests.NotificationProviders.MailTrap
     public class MailTrapEmailProvider : INotificationProvider
     {
 
-        public ENotificationProviderType ProviderType { get; set; }
+        public NotificationProviderType ProviderType { get; set; }
         public INotificationProviderConfig Config { get; set; }
 
         public MailTrapEmailProvider()
         {
-            this.ProviderType = ENotificationProviderType.Email;
+            this.ProviderType = NotificationProviderType.Email;
         }
 
         public void Send(string to, string message)

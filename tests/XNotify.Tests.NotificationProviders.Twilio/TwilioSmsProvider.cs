@@ -15,12 +15,12 @@ namespace XNotify.Tests.NotificationProviders.Twilio
     public class TwilioSmsProvider : INotificationProvider
     {
 
-        public ENotificationProviderType ProviderType { get; set; }
+        public NotificationProviderType ProviderType { get; set; }
         public INotificationProviderConfig Config { get; set; }
 
         public TwilioSmsProvider()
         {
-            this.ProviderType = ENotificationProviderType.Sms;
+            this.ProviderType = NotificationProviderType.Sms;
         }
 
         public void Send(string to, string message)

@@ -11,7 +11,7 @@ namespace XNotify.Contracts
         string Sender { get; set; }
         string Message { get; set; }
         DateTime Received { get; set; }
-        ENotificationProviderType Channel { get; set; }
+        NotificationProviderType Channel { get; set; }
         new string ToString();
     }
 }

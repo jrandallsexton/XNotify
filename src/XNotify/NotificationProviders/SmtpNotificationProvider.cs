@@ -11,7 +11,7 @@ namespace XNotify.NotificationProviders
     public class SmtpNotificationProvider : INotificationProvider
     {
 
-        public ENotificationProviderType ProviderType { get; set; }
+        public NotificationProviderType ProviderType { get; set; }
         public INotificationProviderConfig Config { get; set; }
 
         public void Send(string to, string message)
