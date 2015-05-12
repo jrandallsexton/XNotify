@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using XNotify.Common;
 
 namespace XNotify.Contracts
 {
@@ -13,7 +14,7 @@ namespace XNotify.Contracts
         Guid? ExternalGuid { get; set; }
         IEnumerable<T> GetAll();
         T Get(int id);
-        string GetMessage(int id);
+        string GetMessage(int id, NotificationProviderType notificationProviderType);
         void Unsubscribe(int recipientId, int notificationProviderId);
         void MarkProcessed(int eventId, IEnumerable<int> recipientIds);
     }

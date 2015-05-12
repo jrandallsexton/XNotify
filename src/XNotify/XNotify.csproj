@@ -61,6 +61,7 @@
     <Compile Include="Config\XNotifyConfigSection.cs" />
     <Compile Include="Contracts\INotifiableEvent.cs" />
     <Compile Include="Contracts\INotifiableEventProvider.cs" />
+    <Compile Include="Contracts\INotificationBuilder.cs" />
     <Compile Include="Contracts\INotificationLogger.cs" />
     <Compile Include="Contracts\INotificationPersistence.cs" />
     <Compile Include="Contracts\INotificationProvider.cs" />

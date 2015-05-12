@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Markup;
+using XNotify.Common;
 using XNotify.Contracts;
 using XNotify.Targets;
 
@@ -75,6 +76,11 @@ namespace XNotify.Tests.EventProviders.FakeEventProvider00
         public INotifiableEvent Get(int id)
         {
             return events.Find(x => x.Id == id);
+        }
+
+        public string GetMessage(int id, NotificationProviderType notificationProviderType)
+        {
+            throw new NotImplementedException();
         }
 
         public string GetMessage(int id)

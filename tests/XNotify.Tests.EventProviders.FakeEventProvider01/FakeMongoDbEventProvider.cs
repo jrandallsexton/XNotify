@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XNotify.Common;
 using XNotify.Contracts;
 
 namespace XNotify.Tests.EventProviders.FakeEventProvider01
@@ -35,6 +36,11 @@ namespace XNotify.Tests.EventProviders.FakeEventProvider01
         }
 
         public INotifiableEvent Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMessage(int id, NotificationProviderType notificationProviderType)
         {
             throw new NotImplementedException();
         }
