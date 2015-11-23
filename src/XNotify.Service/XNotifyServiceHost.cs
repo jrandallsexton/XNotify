@@ -13,7 +13,7 @@ namespace XNotify.Service
     public partial class XNotifyServiceHost : ServiceBase
     {
 
-        private INotificationService _service;
+        private readonly INotificationService _service;
 
         public XNotifyServiceHost()
         {

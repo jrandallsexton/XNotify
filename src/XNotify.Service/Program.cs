@@ -22,7 +22,7 @@ namespace XNotify.Service
             };
             ServiceBase.Run(ServicesToRun);
 #else
-            XNotifyServiceHost myServ = new XNotifyServiceHost();
+            var myServ = new XNotifyServiceHost();
             myServ.Startup();
             // here Process is my Service function
             // that will run when my service onstart is call
