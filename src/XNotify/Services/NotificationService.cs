@@ -50,8 +50,8 @@ namespace XNotify.Services
         public void Start()
         {
             this.Logger.Log(string.Format("XNotify started {0}", Configuration.Name));
-            this.NotificationProviders = LoadNotificationProviders(Configuration.NotificationProvidersPath, Configuration.NotificationProviders);
             this.EventProviders = LoadEventProviders(Configuration.EventProvidersPath, Configuration.EventProviders);
+            this.NotificationProviders = LoadNotificationProviders(Configuration.NotificationProvidersPath, Configuration.NotificationProviders);
 
             this._timer.Interval = 5000;
             this._timer.Elapsed += _timer_Elapsed;
@@ -191,7 +191,8 @@ namespace XNotify.Services
                 //    Logger.Log(log);
                 //}
 
-                var notificationProviderInstance = (INotificationProvider)notificationProviderAssembly.CreateInstance(element.Class);
+                var notificationProviderInstance =
+                    (INotificationProvider) notificationProviderAssembly.CreateInstance(element.Class);
 
                 if (notificationProviderInstance == null) continue;
 

@@ -19,7 +19,7 @@ namespace XNotify.Tests.EventProviders.FakeEventProvider00
         public int? ExternalId { get; set; }
         public Guid? ExternalGuid { get; set; }
 
-        private List<INotifiableEvent> events = null;
+        private readonly List<INotifiableEvent> events = null;
 
         public FakeSqlEventProvider()
         {
