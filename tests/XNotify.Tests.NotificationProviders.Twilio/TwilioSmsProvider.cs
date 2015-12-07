@@ -25,8 +25,20 @@ namespace XNotify.Tests.NotificationProviders.Twilio
 
         public void Send(string to, string message)
         {
-            var twilio = new TwilioRestClient(Config.AccountSid, Config.AuthToken);
-            twilio.SendMessage(Config.AccountName, to, message);
+            TwilioRestClient twilio;
+
+            try
+            {
+                twilio = new TwilioRestClient(Config.AccountSid, Config.AuthToken);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
+            var result = twilio.SendMessage(Config.AccountName, to, message);
+
+            Console.WriteLine(result.ErrorMessage);
         }
 
         public void Send(string to, string subject, string message)
